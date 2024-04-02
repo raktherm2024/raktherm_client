@@ -20,7 +20,7 @@ const Pipes = ({ openPipes, setOpenPipes, setOpenFittings, type }) => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/products/ppr-pipes")
+      .get("https://raktherm-backend.vercel.app/api/products/ppr-pipes")
       .then((res) => setPprPipes(res?.data));
   }, []);
 
