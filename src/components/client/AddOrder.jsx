@@ -12,8 +12,11 @@ import UPVC from "./upvc";
 import RAKDUCT from "./rakduct";
 import { BsBoxArrowInRight } from "react-icons/bs";
 import { PEX_ADAPTERS, PEX_PIPES, PPR_FITTINGS, PPR_PIPES } from "./data";
+import MessageModal from "./MessageModal";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
-const AddOrder = ({ userData, status, setStatus }) => {
+const AddOrder = ({ userData, status, setStatus, setPage }) => {
   const { userId } = userData;
   const [orderData, setOrderData] = useState([]);
   const [orderId, setOrderId] = useState("");
@@ -104,11 +107,34 @@ const AddOrder = ({ userData, status, setStatus }) => {
     setOrderId,
   };
 
-  const handleClick = () => {
+  // ORDERS
+
+  const [showMessage, setShowMessage] = useState(false);
+
+  const handleSubmitOrder = () => {
     axios
-      .post("http://localhost:5000/api/products/pex-adapters", PEX_ADAPTERS)
-      .then((res) => console.log(res));
+      .post("http://localhost:5000/api/orders/submit-order", {
+        orderId,
+        userId,
+      })
+      .then((res) => {
+        if (res) {
+          setOrderForm(false);
+          toast.success("Order has been submitted successfully.", {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: false,
+            progress: undefined,
+            theme: "colored",
+          });
+        }
+      });
   };
+
+  const modalProps = { showMessage, setShowMessage, handleSubmitOrder };
 
   return (
     <div className="w-full">
@@ -190,7 +216,7 @@ const AddOrder = ({ userData, status, setStatus }) => {
 
             <h1
               className="cursor-pointer bg-green-500 text-white hover:bg-white hover:border-2 hover:border-green-500 hover:text-black flex items-center gap-1 text-base  px-2 py-1 rounded-md border-2 border-white shadow-md"
-              onClick={handleClick}
+              onClick={() => setShowMessage(true)}
             >
               <BsBoxArrowInRight size={20} className="mb-1" />
               Submit Order
@@ -205,6 +231,8 @@ const AddOrder = ({ userData, status, setStatus }) => {
       </div>
 
       <ConfirmationMessage {...props} />
+
+      <MessageModal {...modalProps} />
 
       {/* MODAL */}
       {status === "Unfinished" && (

@@ -8,6 +8,8 @@ import AddCustomer from "./AddCustomer";
 import AddProduct from "./AddProduct";
 import AddOrder from "./client/AddOrder";
 import MyOrders from "./client/MyOrders";
+import MessageCustomer from "./MessageCustomer";
+import MessageHistory from "./MessageHistory";
 
 const Content = ({
   show,
@@ -42,6 +44,12 @@ const Content = ({
 
       case "add-product":
         return <AddProduct {...props} />;
+
+      case "message-customer":
+        return <MessageCustomer {...props} />;
+
+      case "message-history":
+        return <MessageHistory {...props} />;
     }
   };
 

@@ -1350,3 +1350,151 @@ export const PEX_ADAPTERS = [
 ];
 
 // END
+
+{
+  /***********************************************************************************************************/
+}
+
+// UPVC
+// Dropdown Options
+
+export const UPVC_PIPES_OPTIONS = [
+  {
+    name: "SOLVENT WHITE PIPE V1",
+  },
+  {
+    name: "SOLVENT WHITE PIPE WITH SOCKETING V2",
+  },
+  {
+    name: "PUSH-FIT GRAY PIPE V3",
+  },
+  {
+    name: "SOLVENT GRAY PIPE V4",
+  },
+  {
+    name: "RUBBER ORANGE PIPE V5",
+  },
+  {
+    name: "SOLVENT ORANGE PIPE V6",
+  },
+];
+
+// Dropdown Data
+
+export const UPVC_PIPES = [
+  {
+    name: "SOLVENT WHITE PIPE V1",
+    items: [
+      { itemCode: "PRF-PV1-50x1.8x5.5" },
+      { itemCode: "PRF-PV1-50x2.4x5.5" },
+      { itemCode: "PRF-PV1-50x3.7x5.5" },
+      { itemCode: "PRF-PV1-50x3.0x3" },
+      { itemCode: "PRF-PV1-50x3.0x5.8" },
+      { itemCode: "PRF-PV1-50x3.0" },
+      { itemCode: "PRF-PV1-50x4.0" },
+      { itemCode: "PRF-PV1-50x5.0" },
+      { itemCode: "PRF-PV1-63x3.0" },
+      { itemCode: "PRF-PV1-63x3.0x5.5" },
+      { itemCode: "PRF-PV1-75x3.0x5.8" },
+      { itemCode: "PRF-PV1-75x3.0x3" },
+      { itemCode: "PRF-PV1-75x3.0" },
+      { itemCode: "PRF-PV1-75x4.0x5.5" },
+      { itemCode: "PRF-PV1-75x4.0" },
+      { itemCode: "PRF-PV1-75x5.0" },
+      { itemCode: "PRF-PV1-90x3.2" },
+      { itemCode: "PRF-PV1-90x4.0" },
+      { itemCode: "PRF-PV1-110x2.2x5.5" },
+      { itemCode: "PRF-PV1-110x3.2x5.5" },
+      { itemCode: "PRF-PV1-110x3.0x3" },
+      { itemCode: "PRF-PV1-110x3.0x5.95" },
+      { itemCode: "PRF-PV1-110x4.5x5.5" },
+      { itemCode: "PRF-PV1-110x4.0x3" },
+      { itemCode: "PRF-PV1-110x4.0x5.5" },
+      { itemCode: "PRF-PV1-110x4.0x5.8" },
+      { itemCode: "PRF-PV1-110x4.0x5.95" },
+      { itemCode: "PRF-PV1-110x5.3x5.5" },
+      { itemCode: "PRF-PV1-110x5.0x5.95" },
+      { itemCode: "PRF-PV1-160x3.2x5.5" },
+      { itemCode: "PRF-PV1-160x3.0" },
+      { itemCode: "PRF-PV1-160x4.7x5.5" },
+      { itemCode: "PRF-PV1-160x4.0" },
+      { itemCode: "PRF-PV1-160x5.0x3" },
+      { itemCode: "PRF-PV1-160x5.0x5.8" },
+      { itemCode: "PRF-PV1-160x5.0" },
+      { itemCode: "PRF-PV1-160x7.7x5.5" },
+      { itemCode: "PRF-PV1-160x7.0x5.5" },
+    ],
+  },
+  {
+    name: "SOLVENT WHITE PIPE WITH SOCKETING V2",
+    items: [
+      { itemCode: "PRF-PV2-32x1.5" },
+      { itemCode: "PRF-PV2-32x1.8x4" },
+      { itemCode: "PRF-PV2-32x1.8" },
+      { itemCode: "PRF-PV2-32x2.0x4" },
+      { itemCode: "PRF-PV2-32x2.0x5.8" },
+      { itemCode: "PRF-PV2-32x2.0" },
+      { itemCode: "" },
+      { itemCode: "" },
+      { itemCode: "" },
+      { itemCode: "" },
+      { itemCode: "" },
+      { itemCode: "" },
+      { itemCode: "" },
+      { itemCode: "" },
+      { itemCode: "" },
+      { itemCode: "" },
+      { itemCode: "" },
+      { itemCode: "" },
+      { itemCode: "" },
+      { itemCode: "" },
+      { itemCode: "" },
+      { itemCode: "" },
+      { itemCode: "" },
+      { itemCode: "" },
+      { itemCode: "" },
+      { itemCode: "" },
+      { itemCode: "" },
+      { itemCode: "" },
+      { itemCode: "" },
+      { itemCode: "" },
+      { itemCode: "" },
+      { itemCode: "" },
+      { itemCode: "" },
+      { itemCode: "" },
+      { itemCode: "" },
+      { itemCode: "" },
+      { itemCode: "" },
+      { itemCode: "" },
+      { itemCode: "" },
+      { itemCode: "" },
+      { itemCode: "" },
+      { itemCode: "" },
+      { itemCode: "" },
+      { itemCode: "" },
+      { itemCode: "" },
+      { itemCode: "" },
+      { itemCode: "" },
+      { itemCode: "" },
+      { itemCode: "" },
+      { itemCode: "" },
+      { itemCode: "" },
+      { itemCode: "" },
+      { itemCode: "" },
+      { itemCode: "" },
+      { itemCode: "" },
+    ],
+  },
+  {
+    name: "PUSH-FIT GRAY PIPE V3",
+  },
+  {
+    name: "SOLVENT GRAY PIPE V4",
+  },
+  {
+    name: "RUBBER ORANGE PIPE V5",
+  },
+  {
+    name: "SOLVENT ORANGE PIPE V6",
+  },
+];

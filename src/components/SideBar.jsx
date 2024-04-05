@@ -7,6 +7,8 @@ import { GrStatusInfo } from "react-icons/gr";
 import { LuUserPlus2 } from "react-icons/lu";
 import { useNavigate } from "react-router-dom";
 import { RiProductHuntLine } from "react-icons/ri";
+import { TiMessage } from "react-icons/ti";
+import { TiMessages } from "react-icons/ti";
 
 const SideBar = ({ page, setPage, handleStatus, userData }) => {
   const { userType } = userData;
@@ -26,6 +28,28 @@ const SideBar = ({ page, setPage, handleStatus, userData }) => {
                 onClick={() => setPage("customers")}
               >
                 <LiaUsersSolid /> Customers
+              </div>
+            )}
+
+            {userType === "Admin" && (
+              <div
+                className={`${
+                  page === "message-customer" && "bg-gray-100"
+                } flex flex-row items-center gap-4 text-xl hover:bg-gray-100 p-4 rounded-md cursor-pointer`}
+                onClick={() => setPage("message-customer")}
+              >
+                <TiMessage /> Message Customers
+              </div>
+            )}
+
+            {userType === "Admin" && (
+              <div
+                className={`${
+                  page === "message-history" && "bg-gray-100"
+                } flex flex-row items-center gap-4 text-xl hover:bg-gray-100 p-4 rounded-md cursor-pointer`}
+                onClick={() => setPage("message-history")}
+              >
+                <TiMessages /> Message History
               </div>
             )}
 
@@ -53,7 +77,7 @@ const SideBar = ({ page, setPage, handleStatus, userData }) => {
                 <FaRegListAlt /> Create Order
               </div>
             )}
-            {userType === "Admin" && (
+            {/* {userType === "Admin" && (
               <div
                 className={`${
                   page === "orders" && "bg-gray-100"
@@ -73,7 +97,7 @@ const SideBar = ({ page, setPage, handleStatus, userData }) => {
               >
                 <GrStatusInfo /> Order Status
               </div>
-            )}
+            )} */}
           </div>
         </div>
 
@@ -90,7 +114,7 @@ const SideBar = ({ page, setPage, handleStatus, userData }) => {
               </div>
             )}
 
-            {userType === "Admin" && (
+            {/* {userType === "Admin" && (
               <div
                 className={`${
                   page === "add-product" && "bg-gray-100"
@@ -99,16 +123,16 @@ const SideBar = ({ page, setPage, handleStatus, userData }) => {
               >
                 <RiProductHuntLine /> Add Product
               </div>
-            )}
+            )} */}
 
             {/* <div className="flex flex-row items-center gap-4 text-xl hover:bg-gray-100 p-4 rounded-md cursor-pointer">
               <FaMoon /> Dark
             </div> */}
-            {userType === "Admin" && (
+            {/* {userType === "Admin" && (
               <div className="flex flex-row items-center gap-4 text-xl hover:bg-gray-100 p-4 rounded-md cursor-pointer">
                 <TbReportAnalytics /> Report
               </div>
-            )}
+            )} */}
 
             <div
               className="flex flex-row items-center gap-4 text-xl hover:bg-gray-100 p-4 rounded-md cursor-pointer"

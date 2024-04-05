@@ -11,6 +11,10 @@ body {
   box-sizing: border-box;
 }
 
+pre {
+  font-family: "Montserrat", sans-serif;
+}
+
 .bg-glass {
   /* From https://css.glass */
   background: rgba(255, 255, 255, 0.2);
