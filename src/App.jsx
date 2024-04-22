@@ -19,11 +19,7 @@ const App = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Login />} />
-        {userData ? (
-          <Route path="/dashboard" element={<Dashboard {...props} />} />
-        ) : (
-          <Route path="/*" element={<Login />} />
-        )}
+        <Route path="/dashboard" element={<Dashboard {...props} />} />
       </Routes>
       <ToastContainer
         position="top-right"
