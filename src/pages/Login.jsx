@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { ClipLoader } from "react-spinners";
+import BG from "../../src/assets/img/product.png";
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -61,7 +62,16 @@ const Login = () => {
   };
 
   return (
-    <div className="relative bg-screen bg-contain bg-bottom bg-no-repeat cent w-full h-screen flex items-center justify-center">
+    <div
+      className="relative  h-screen flex items-center justify-center"
+      style={{
+        background: `url(${BG})`,
+        backgroundRepeat: "no-repeat",
+        width: "100%",
+        backgroundSize: "contain",
+        backgroundPosition: "bottom",
+      }}
+    >
       <div className="absolute h-screen w-full bg-black/70">
         <div className="absolute top-[15%] right-1/2 translate-x-1/2 w-[96%] xl:w-[30%] backdrop-blur-[1px] bg-white/30 border-white border rounded-lg shadow-md shadow-white/50 pt-10 px-16">
           <div className="flex text-center justify-center">
