@@ -20,13 +20,13 @@ const Pipes = ({ openFittings, setOpenFittings, setOpenPipes, type }) => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/products/ppr-fittings")
+      .get("https://raktherm-backend.vercel.app/api/products/ppr-fittings")
       .then((res) => setPprFittings(res?.data));
   }, []);
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/products/all-ppr-fittings")
+      .get("https://raktherm-backend.vercel.app/api/products/all-ppr-fittings")
       .then((res) => setFittingsData(res?.data));
   }, [type]);
 
@@ -60,11 +60,16 @@ const Pipes = ({ openFittings, setOpenFittings, setOpenPipes, type }) => {
     }
 
     axios
-      .post("http://localhost:5000/api/products/ppr-fittings", data)
+      .post(
+        "https://raktherm-backend.vercel.app/api/products/ppr-fittings",
+        data
+      )
       .then((res) => {
         if (res) {
           axios
-            .get("http://localhost:5000/api/products/all-ppr-fittings")
+            .get(
+              "https://raktherm-backend.vercel.app/api/products/all-ppr-fittings"
+            )
             .then((res) => setFittingsData(res?.data));
 
           toast.success("New product has been added", {
@@ -95,10 +100,13 @@ const Pipes = ({ openFittings, setOpenFittings, setOpenPipes, type }) => {
 
   const handleRemovePipe = (name, code) => {
     axios
-      .post("http://localhost:5000/api/products/remove-ppr-fittings", {
-        itemName: name,
-        itemCode: code,
-      })
+      .post(
+        "https://raktherm-backend.vercel.app/api/products/remove-ppr-fittings",
+        {
+          itemName: name,
+          itemCode: code,
+        }
+      )
       .then((res) => {
         setFittingsData(res?.data);
         toast.success("Product has been removed", {

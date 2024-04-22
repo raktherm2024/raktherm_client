@@ -11,7 +11,13 @@ import PEX from "./pex";
 import UPVC from "./upvc";
 import RAKDUCT from "./rakduct";
 import { BsBoxArrowInRight } from "react-icons/bs";
-import { PEX_ADAPTERS, PEX_PIPES, PPR_FITTINGS, PPR_PIPES } from "./data";
+import {
+  PEX_ADAPTERS,
+  PEX_PIPES,
+  PPR_FITTINGS,
+  PPR_PIPES,
+  UPVC_PIPES,
+} from "./data";
 import MessageModal from "./MessageModal";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -67,7 +73,7 @@ const AddOrder = ({ userData, status, setStatus, setPage }) => {
     setOrderData("");
 
     axios
-      .post("http://localhost:5000/api/orders", {
+      .post("https://raktherm-backend.vercel.app/api/orders", {
         userId,
         orderNo,
       })
@@ -113,7 +119,7 @@ const AddOrder = ({ userData, status, setStatus, setPage }) => {
 
   const handleSubmitOrder = () => {
     axios
-      .post("http://localhost:5000/api/orders/submit-order", {
+      .post("https://raktherm-backend.vercel.app/api/orders/submit-order", {
         orderId,
         userId,
       })

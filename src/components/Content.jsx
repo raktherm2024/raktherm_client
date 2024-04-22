@@ -10,6 +10,8 @@ import AddOrder from "./client/AddOrder";
 import MyOrders from "./client/MyOrders";
 import MessageCustomer from "./MessageCustomer";
 import MessageHistory from "./MessageHistory";
+import AddEmployee from "./AddEmployee";
+import Employee from "./Employee";
 
 const Content = ({
   show,
@@ -27,6 +29,9 @@ const Content = ({
       case "customers":
         return <Customers {...props} />;
 
+      case "employee":
+        return <Employee {...props} />;
+
       case "order":
         return <AddOrder {...props} />;
 
@@ -38,6 +43,9 @@ const Content = ({
 
       case "order-status":
         return <OrderStatus {...props} />;
+
+      case "add-employee":
+        return <AddEmployee {...props} />;
 
       case "add-customer":
         return <AddCustomer {...props} />;

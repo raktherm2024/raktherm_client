@@ -8,7 +8,7 @@ export default {
   theme: {
     extend: {
       backgroundImage: {
-        screen: "url(./src/assets/img/bg-full.png)",
+        screen: "url(./src/assets/img/product.png)",
       },
     },
   },

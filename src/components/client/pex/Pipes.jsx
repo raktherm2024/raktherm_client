@@ -19,13 +19,13 @@ const Pipes = ({ orderId, setOrderData }) => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/products/pex-pipes")
+      .get("https://raktherm-backend.vercel.app/api/products/pex-pipes")
       .then((res) => setPexPipes(res?.data));
   }, []);
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/products/all-pex-pipes")
+      .get("https://raktherm-backend.vercel.app/api/products/all-pex-pipes")
       .then((res) => setAllData(res?.data));
   }, []);
 

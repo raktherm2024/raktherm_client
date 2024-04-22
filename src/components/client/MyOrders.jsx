@@ -1,6 +1,6 @@
 import axios from "axios";
 import { Table } from "flowbite-react";
-import { FaRegEdit } from "react-icons/fa";
+import { FaTrashAlt } from "react-icons/fa";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 
 const MyOrders = ({ setPage }) => {
@@ -26,7 +26,7 @@ const MyOrders = ({ setPage }) => {
                   className="flex flex-row items-center gap-2 text-blue-500 cursor-pointer"
                   onClick={() => setPage("order")}
                 >
-                  <FaRegEdit /> Continue
+                  <FaTrashAlt /> Continue
                 </div>
                 |
                 <div className="flex flex-row items-center gap-2 text-blue-500 cursor-pointer">

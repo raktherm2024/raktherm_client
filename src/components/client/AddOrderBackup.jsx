@@ -39,7 +39,7 @@ const AddOrder = ({ userData, status, setStatus }) => {
     setOrderData("");
 
     axios
-      .post("http://localhost:5000/api/orders", {
+      .post("https://raktherm-backend.vercel.app/api/orders", {
         userId,
         orderNo,
       })

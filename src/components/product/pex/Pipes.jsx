@@ -20,13 +20,13 @@ const Pipes = ({ openPipes, setOpenPipes, setOpenFittings, type }) => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/products/pex-pipes")
+      .get("https://raktherm-backend.vercel.app/api/products/pex-pipes")
       .then((res) => setPexPipes(res?.data));
   }, []);
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/products/all-pex-pipes")
+      .get("https://raktherm-backend.vercel.app/api/products/all-pex-pipes")
       .then((res) => setPipeData(res?.data));
   }, [type]);
 
@@ -58,11 +58,13 @@ const Pipes = ({ openPipes, setOpenPipes, setOpenFittings, type }) => {
     }
 
     axios
-      .post("http://localhost:5000/api/products/pex-pipes", data)
+      .post("https://raktherm-backend.vercel.app/api/products/pex-pipes", data)
       .then((res) => {
         if (res) {
           axios
-            .get("http://localhost:5000/api/products/all-pex-pipes")
+            .get(
+              "https://raktherm-backend.vercel.app/api/products/all-pex-pipes"
+            )
             .then((res) => setPipeData(res?.data));
 
           toast.success("New product has been added", {
@@ -93,10 +95,13 @@ const Pipes = ({ openPipes, setOpenPipes, setOpenFittings, type }) => {
 
   const handleRemovePipe = (name, code) => {
     axios
-      .post("http://localhost:5000/api/products/remove-pex-pipes", {
-        itemName: name,
-        itemCode: code,
-      })
+      .post(
+        "https://raktherm-backend.vercel.app/api/products/remove-pex-pipes",
+        {
+          itemName: name,
+          itemCode: code,
+        }
+      )
       .then((res) => {
         setPipeData(res?.data);
         toast.success("Product has been removed", {

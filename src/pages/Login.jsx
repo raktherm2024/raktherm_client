@@ -3,6 +3,7 @@ import LOGO from "../assets/img/rak-logo.png";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
+import { ClipLoader } from "react-spinners";
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -11,6 +12,7 @@ const Login = () => {
   });
   const navigate = useNavigate();
   const { email, password } = formData;
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
@@ -18,7 +20,7 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    setLoading(true);
     if (!email || !password) {
       toast.error("Please input your email and password.", {
         position: "top-right",
@@ -32,13 +34,14 @@ const Login = () => {
       });
     } else {
       axios
-        .post("http://localhost:5000/api/auth/login", {
+        .post("https://raktherm-backend.vercel.app/api/auth/login", {
           email,
           password,
         })
         .then((res) => {
-          navigate("/dashboard");
           localStorage.setItem("userDetails", JSON.stringify(res.data));
+          navigate("/dashboard");
+          window.location.reload();
         })
         .catch((err) => {
           toast.error(err?.response?.data?.message, {
@@ -52,14 +55,15 @@ const Login = () => {
             theme: "colored",
           });
           setFormData({ ...formData, password: "" });
+          setLoading(false);
         });
     }
   };
 
   return (
-    <div className="relative bg-screen bg-cover bg-center bg-no-repeat w-full h-screen flex items-center justify-center">
+    <div className="relative bg-screen bg-contain bg-bottom bg-no-repeat cent w-full h-screen flex items-center justify-center">
       <div className="absolute h-screen w-full bg-black/70">
-        <div className="absolute top-1/4 right-1/2 translate-x-1/2 w-[96%] xl:w-[30%] backdrop-blur-[1px] bg-white/30 border-white border rounded-lg shadow-md shadow-white/50 pt-10 px-16">
+        <div className="absolute top-[15%] right-1/2 translate-x-1/2 w-[96%] xl:w-[30%] backdrop-blur-[1px] bg-white/30 border-white border rounded-lg shadow-md shadow-white/50 pt-10 px-16">
           <div className="flex text-center justify-center">
             <img src={LOGO} alt="logo" className="w-96" />
           </div>
@@ -85,8 +89,17 @@ const Login = () => {
                 onChange={handleChange}
               />
 
-              <button className="bg-white/70 py-2 px-10 rounded-md text-black/70 font-medium mt-2">
-                SUBMIT
+              <button
+                className={`bg-white/70 py-2 px-10 rounded-md text-black font-medium mt-2 disabled:cursor-not-allowed`}
+                disabled={loading ? true : false}
+              >
+                {loading ? (
+                  <div className="flex flex-row items-center justify-center gap-2">
+                    <ClipLoader color="black" size={20} /> Please wait . . .
+                  </div>
+                ) : (
+                  "SUBMIT"
+                )}
               </button>
             </div>
           </form>

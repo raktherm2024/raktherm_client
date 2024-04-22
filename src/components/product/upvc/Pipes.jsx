@@ -14,20 +14,19 @@ const Pipes = ({ openPipes, setOpenPipes, setOpenFittings, type }) => {
     itemName: "",
     itemCode: "",
   });
-  const [pprPipes, setPprPipes] = useState([]);
+  const [upvcPipes, setUpvcPipes] = useState([]);
 
   const { itemName, itemCode } = data;
 
   useEffect(() => {
     axios
-      // .get("https://raktherm-backend.vercel.app/api/products/ppr-pipes")
-      .get("https://raktherm-backend.vercel.app/api/products/ppr-pipes")
-      .then((res) => setPprPipes(res?.data));
+      .get("https://raktherm-backend.vercel.app/api/products/upvc-pipes")
+      .then((res) => setUpvcPipes(res?.data));
   }, []);
 
   useEffect(() => {
     axios
-      .get("https://raktherm-backend.vercel.app/api/products/all-ppr-pipes")
+      .get("https://raktherm-backend.vercel.app/api/products/all-upvc-pipes")
       .then((res) => setPipeData(res?.data));
   }, [type]);
 
@@ -59,12 +58,12 @@ const Pipes = ({ openPipes, setOpenPipes, setOpenFittings, type }) => {
     }
 
     axios
-      .post("https://raktherm-backend.vercel.app/api/products/ppr-pipes", data)
+      .post("https://raktherm-backend.vercel.app/api/products/upvc-pipes", data)
       .then((res) => {
         if (res) {
           axios
             .get(
-              "https://raktherm-backend.vercel.app/api/products/all-ppr-pipes"
+              "https://raktherm-backend.vercel.app/api/products/all-upvc-pipes"
             )
             .then((res) => setPipeData(res?.data));
 
@@ -97,7 +96,7 @@ const Pipes = ({ openPipes, setOpenPipes, setOpenFittings, type }) => {
   const handleRemovePipe = (name, code) => {
     axios
       .post(
-        "https://raktherm-backend.vercel.app/api/products/remove-ppr-pipes",
+        "https://raktherm-backend.vercel.app/api/products/remove-upvc-pipes",
         {
           itemName: name,
           itemCode: code,
@@ -121,7 +120,7 @@ const Pipes = ({ openPipes, setOpenPipes, setOpenFittings, type }) => {
   return (
     <>
       <div
-        className="flex items-center justify-between px-4 py-2 border-r-2 border-l-2 border-t-2 bg-green-500 text-white rounded-tr-lg rounded-tl-lg cursor-pointer"
+        className="flex items-center justify-between px-4 py-2 border-r-2 border-l-2 border-t-2 bg-orange-400 text-white rounded-tr-lg rounded-tl-lg cursor-pointer"
         onClick={() => {
           setOpenPipes(!openPipes);
           setOpenFittings(false);
@@ -144,7 +143,7 @@ const Pipes = ({ openPipes, setOpenPipes, setOpenFittings, type }) => {
       >
         <div className="flex items-center justify-between gap-4">
           <ItemName
-            options={pprPipes}
+            options={upvcPipes}
             label="name"
             id="itemName"
             selectedVal={itemName}
@@ -162,7 +161,7 @@ const Pipes = ({ openPipes, setOpenPipes, setOpenFittings, type }) => {
           />
 
           <button
-            className="px-4 py-1 bg-green-500 border-2 border-green-500 rounded-md text-2xl text-white hover:border-green-500 hover:bg-white hover:text-black"
+            className="px-4 py-1 bg-orange-400 border-2 border-orange-400 rounded-md text-2xl text-white hover:border-orange-400 hover:bg-white hover:text-black"
             onClick={handleAddPipe}
           >
             +
@@ -218,7 +217,7 @@ const Pipes = ({ openPipes, setOpenPipes, setOpenFittings, type }) => {
                   <div className="w-full" key={data.name}>
                     {data?.items?.map((item) => (
                       <div
-                        className="text-left py-3 px-6 text-xs text-[#6b7280]"
+                        className="text-left py-3 px-6 text-xs text-[#6b7280] uppercase"
                         key={item.ItemCode}
                       >
                         {data.name}
@@ -229,7 +228,7 @@ const Pipes = ({ openPipes, setOpenPipes, setOpenFittings, type }) => {
                   {/* Item Code */}
 
                   <div className="w-full">
-                    {data?.items?.map((item) => (
+                    {data?.items.map((item) => (
                       <div
                         className="text-left py-3 px-6 text-xs text-[#6b7280]"
                         key={item.itemCode}
@@ -243,7 +242,7 @@ const Pipes = ({ openPipes, setOpenPipes, setOpenFittings, type }) => {
                   <div className="w-1/2">
                     {data?.items?.map((item) => (
                       <div
-                        className="flex items-center justify-end text-left py-3 px-6 text-xs text-[#6b7280] pr-10"
+                        className="flex items-center justify-end text-left py-3 px-6 text-xs text-[#6b7280] uppercase pr-10"
                         key={item.ItemCode}
                       >
                         <TiDelete

@@ -19,13 +19,13 @@ const Adapters = ({ orderId, setOrderData }) => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/products/pex-adapters")
+      .get("https://raktherm-backend.vercel.app/api/products/pex-adapters")
       .then((res) => setPexAdapters(res?.data));
   }, []);
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/products/all-pex-adapters")
+      .get("https://raktherm-backend.vercel.app/api/products/all-pex-adapters")
       .then((res) => setAllData(res?.data));
   }, []);
 

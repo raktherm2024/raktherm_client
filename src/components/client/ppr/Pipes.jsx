@@ -18,13 +18,13 @@ const Pipes = ({ orderId, setOrderData }) => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/products/ppr-pipes")
+      .get("https://raktherm-backend.vercel.app/api/products/ppr-pipes")
       .then((res) => setPprPipes(res?.data));
   }, []);
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/products/all-ppr-pipes")
+      .get("https://raktherm-backend.vercel.app/api/products/all-ppr-pipes")
       .then((res) => setAllData(res?.data));
   }, []);
 

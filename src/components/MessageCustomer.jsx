@@ -31,14 +31,14 @@ const MessageCustomer = ({ userData }) => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/customers")
+      .get("https://raktherm-backend.vercel.app/api/customers")
       .then((res) => {
         setCustomerData(res.data);
       })
       .catch((err) => console.log(err));
 
     axios
-      .get("http://localhost:5000/api/templates")
+      .get("https://raktherm-backend.vercel.app/api/templates")
       .then((res) => {
         setTemplates(res.data);
       })
@@ -47,7 +47,7 @@ const MessageCustomer = ({ userData }) => {
 
   const refreshData = () => {
     axios
-      .get("http://localhost:5000/api/templates")
+      .get("https://raktherm-backend.vercel.app/api/templates")
       .then((res) => {
         setTemplates(res.data);
       })
@@ -72,7 +72,7 @@ const MessageCustomer = ({ userData }) => {
 
   const handleSaveTemplate = () => {
     axios
-      .post("http://localhost:5000/api/templates/", templateData)
+      .post("https://raktherm-backend.vercel.app/api/templates/", templateData)
       .then((res) => {
         setShowModal(false);
         refreshData();
@@ -99,7 +99,7 @@ const MessageCustomer = ({ userData }) => {
 
   const handleTxtMessage = () => {
     axios
-      .post("http://localhost:5000/api/messages/send", {
+      .post("https://raktherm-backend.vercel.app/api/messages/send", {
         contactList,
         messageContent,
       })
@@ -120,21 +120,44 @@ const MessageCustomer = ({ userData }) => {
       });
   };
 
+  const error = (message) => {
+    toast.error(message, {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: false,
+      progress: undefined,
+      theme: "colored",
+    });
+    setLoading(false);
+  };
+
   const handleSendNow = () => {
     setLoading(true);
-    axios
-      .post("http://localhost:5000/api/messages/", {
-        customerList,
-        messageContent,
-        sentFrom: userData.customerName,
-      })
-      .then((res) => {
-        if (res) {
-          handleTxtMessage();
-          setMessageContent([]);
-          setCustomerList([]);
-        }
-      });
+
+    if (!messageContent && customerList.length === 0) {
+      error("All fields are required!");
+    } else if (!messageContent) {
+      error("Message is required!");
+    } else if (customerList.length === 0) {
+      error("Recepient is required!");
+    } else {
+      axios
+        .post("https://raktherm-backend.vercel.app/api/messages/", {
+          customerList,
+          messageContent,
+          sentFrom: userData.customerName,
+        })
+        .then((res) => {
+          if (res) {
+            handleTxtMessage();
+            setMessageContent([]);
+            setCustomerList([]);
+          }
+        });
+    }
   };
 
   return (
@@ -151,7 +174,10 @@ const MessageCustomer = ({ userData }) => {
               <p className="font-bold text-lg mb-4">Recepient:</p>
               <div className="flex flex-wrap gap-4 p-4 border-2 h-40 rounded-md shadow-md">
                 {filteredArr.map((data, index) => (
-                  <div className="relative flex flex-col justify-center h-16 border-2 border-green-500 p-2 rounded-md shadow-md">
+                  <div
+                    className="relative flex flex-col justify-center h-16 border-2 border-green-500 p-2 rounded-md shadow-md"
+                    key={data.name}
+                  >
                     <div className="font-bold">{data.name}</div>
                     <div className="flex flex-row items-center">
                       <FaMobileAlt />

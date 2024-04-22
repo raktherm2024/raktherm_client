@@ -20,13 +20,13 @@ const Adapters = ({ openFittings, setOpenFittings, setOpenPipes, type }) => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/products/pex-adapters")
+      .get("https://raktherm-backend.vercel.app/api/products/pex-adapters")
       .then((res) => setPexAdapters(res?.data));
   }, []);
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/products/all-pex-adapters")
+      .get("https://raktherm-backend.vercel.app/api/products/all-pex-adapters")
       .then((res) => setAdaptersData(res?.data));
   }, [type]);
 
@@ -60,11 +60,16 @@ const Adapters = ({ openFittings, setOpenFittings, setOpenPipes, type }) => {
     }
 
     axios
-      .post("http://localhost:5000/api/products/pex-adapters", data)
+      .post(
+        "https://raktherm-backend.vercel.app/api/products/pex-adapters",
+        data
+      )
       .then((res) => {
         if (res) {
           axios
-            .get("http://localhost:5000/api/products/all-pex-adapters")
+            .get(
+              "https://raktherm-backend.vercel.app/api/products/all-pex-adapters"
+            )
             .then((res) => setAdaptersData(res?.data));
 
           toast.success("New product has been added", {
@@ -95,10 +100,13 @@ const Adapters = ({ openFittings, setOpenFittings, setOpenPipes, type }) => {
 
   const handleRemovePipe = (name, code) => {
     axios
-      .post("http://localhost:5000/api/products/remove-pex-adapters", {
-        itemName: name,
-        itemCode: code,
-      })
+      .post(
+        "https://raktherm-backend.vercel.app/api/products/remove-pex-adapters",
+        {
+          itemName: name,
+          itemCode: code,
+        }
+      )
       .then((res) => {
         setAdaptersData(res?.data);
         toast.success("Product has been removed", {
@@ -158,7 +166,7 @@ const Adapters = ({ openFittings, setOpenFittings, setOpenPipes, type }) => {
           />
 
           <button
-            className="px-4 py-1 bg-green-500 border-2 border-green-500 rounded-md text-2xl text-white hover:border-green-500 hover:bg-white hover:text-black"
+            className="px-4 py-1 bg-yellow-300 border-2 border-yellow-300 rounded-md text-2xl text-white hover:border-yellow-300 hover:bg-white hover:text-black"
             onClick={handleAddFittings}
           >
             +

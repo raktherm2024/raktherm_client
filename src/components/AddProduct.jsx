@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import PPR from "./product/ppr/index.jsx";
 import PEX from "./product/pex/index.jsx";
+import UPVC from "./product/upvc/index.jsx";
 
 const AddProduct = () => {
   const [type, setType] = useState("ppr");
@@ -12,6 +13,9 @@ const AddProduct = () => {
 
       case "pex":
         return <PEX type={type} />;
+
+      case "upvc":
+        return <UPVC type={type} />;
 
       default:
         return <PPR type={type} />;

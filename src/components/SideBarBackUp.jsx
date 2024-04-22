@@ -23,16 +23,6 @@ const SideBar = ({ page, setPage, handleStatus, userData }) => {
             {userType === "Admin" && (
               <div
                 className={`${
-                  page === "employee" && "bg-gray-100"
-                } flex flex-row items-center gap-4 text-xl hover:bg-gray-100 p-4 rounded-md cursor-pointer`}
-                onClick={() => setPage("employee")}
-              >
-                <LiaUsersSolid /> Employee
-              </div>
-            )}
-            {userType === "Admin" && (
-              <div
-                className={`${
                   page === "customers" && "bg-gray-100"
                 } flex flex-row items-center gap-4 text-xl hover:bg-gray-100 p-4 rounded-md cursor-pointer`}
                 onClick={() => setPage("customers")}
@@ -41,7 +31,7 @@ const SideBar = ({ page, setPage, handleStatus, userData }) => {
               </div>
             )}
 
-            {userType !== "Customer" && (
+            {userType === "Admin" && (
               <div
                 className={`${
                   page === "message-customer" && "bg-gray-100"
@@ -52,7 +42,7 @@ const SideBar = ({ page, setPage, handleStatus, userData }) => {
               </div>
             )}
 
-            {userType !== "Customer" && (
+            {userType === "Admin" && (
               <div
                 className={`${
                   page === "message-history" && "bg-gray-100"
@@ -116,16 +106,6 @@ const SideBar = ({ page, setPage, handleStatus, userData }) => {
             {userType === "Admin" && (
               <div
                 className={`${
-                  page === "add-employee" && "bg-gray-100"
-                } flex flex-row items-center gap-4 text-xl hover:bg-gray-100 p-4 rounded-md cursor-pointer`}
-                onClick={() => setPage("add-employee")}
-              >
-                <LuUserPlus2 /> Add Employee
-              </div>
-            )}
-            {userType === "Admin" && (
-              <div
-                className={`${
                   page === "add-customer" && "bg-gray-100"
                 } flex flex-row items-center gap-4 text-xl hover:bg-gray-100 p-4 rounded-md cursor-pointer`}
                 onClick={() => setPage("add-customer")}
@@ -134,7 +114,7 @@ const SideBar = ({ page, setPage, handleStatus, userData }) => {
               </div>
             )}
 
-            {userType === "Admin" && (
+            {/* {userType === "Admin" && (
               <div
                 className={`${
                   page === "add-product" && "bg-gray-100"
@@ -143,7 +123,7 @@ const SideBar = ({ page, setPage, handleStatus, userData }) => {
               >
                 <RiProductHuntLine /> Add Product
               </div>
-            )}
+            )} */}
 
             {/* <div className="flex flex-row items-center gap-4 text-xl hover:bg-gray-100 p-4 rounded-md cursor-pointer">
               <FaMoon /> Dark
