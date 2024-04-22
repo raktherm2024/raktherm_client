@@ -40,9 +40,9 @@ const Login = () => {
           password,
         })
         .then((res) => {
+          window.location.reload();
           localStorage.setItem("userDetails", JSON.stringify(res.data));
           navigate("/dashboard");
-          window.location.reload();
         })
         .catch((err) => {
           toast.error(err?.response?.data?.message, {
