@@ -6,7 +6,7 @@ import axios from "axios";
 const Dashboard = ({ show, setShow }) => {
   const [userData, setUserData] = useState([]);
   const [status, setStatus] = useState("");
-  const [page, setPage] = useState("");
+  const [page, setPage] = useState("customers");
 
   const handleStatus = () => {
     axios
