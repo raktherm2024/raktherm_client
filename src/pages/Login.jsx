@@ -5,6 +5,8 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import { ClipLoader } from "react-spinners";
 import BG from "../../src/assets/img/product.png";
+import { ImEye } from "react-icons/im";
+import { ImEyeBlocked } from "react-icons/im";
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -14,6 +16,7 @@ const Login = () => {
   const navigate = useNavigate();
   const { email, password } = formData;
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
@@ -35,7 +38,7 @@ const Login = () => {
       });
     } else {
       axios
-        .post("https://raktherm-backend.vercel.app/api/auth/login", {
+        .post("http://localhost:5000/api/auth/login", {
           email,
           password,
         })
@@ -84,19 +87,34 @@ const Login = () => {
               <input
                 type="email"
                 placeholder="Email"
-                className="rounded-sm h-10 px-4 w-full border-white border text-black/90 placeholder:text-white/70 bg-white/20 focus:outline-none"
+                className="rounded-sm h-10 px-4 w-full border-white border text-black/90 placeholder:text-white/70 bg-white/20 focus:border-none focus:outline-none"
                 id="email"
                 value={email}
                 onChange={handleChange}
               />
-              <input
-                type="password"
-                placeholder="Password"
-                className="rounded-sm h-10 px-4 w-full border-white border text-black/90 placeholder:text-white/70 bg-white/20 focus:outline-none"
-                id="password"
-                value={password}
-                onChange={handleChange}
-              />
+              <div className="w-full flex items-center justify-between border-white border bg-white/20">
+                <input
+                  type={`${showPassword ? "text" : "password"}`}
+                  placeholder="Password"
+                  className="rounded-sm h-10 px-4 w-full  text-black/90 placeholder:text-white/70 bg-white/20 focus:border-none focus:outline-none"
+                  id="password"
+                  value={password}
+                  onChange={handleChange}
+                />
+                <div onClick={() => setShowPassword(!showPassword)}>
+                  {showPassword ? (
+                    <ImEye
+                      size={20}
+                      className="mx-4 text-black/90 cursor-pointer"
+                    />
+                  ) : (
+                    <ImEyeBlocked
+                      size={20}
+                      className="mx-4 text-black/90 cursor-pointer"
+                    />
+                  )}
+                </div>
+              </div>
 
               <button
                 className={`bg-white/70 py-2 px-10 rounded-md text-black font-medium mt-2 disabled:cursor-not-allowed`}

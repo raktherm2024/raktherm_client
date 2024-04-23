@@ -1,6 +1,7 @@
 import axios from "axios";
 import { Label, TextInput } from "flowbite-react";
 import React, { useState } from "react";
+import { ClipLoader } from "react-spinners";
 import { toast } from "react-toastify";
 
 const AddCustomer = () => {
@@ -12,6 +13,7 @@ const AddCustomer = () => {
     email: "",
     password: "",
   });
+  const [loading, setLoading] = useState(false);
 
   const { customerCode, customerName, location, contact, email, password } =
     formData;
@@ -51,6 +53,7 @@ const AddCustomer = () => {
         progress: undefined,
         theme: "colored",
       });
+      setLoading(false);
     } else {
       axios
         .post("https://raktherm-backend.vercel.app/api/customers", formData)
@@ -66,20 +69,25 @@ const AddCustomer = () => {
             theme: "colored",
           }),
             clearData();
+          setLoading(false);
         })
-        .catch((err) =>
-          toast.error(err?.response?.data?.message, {
-            position: "top-right",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: false,
-            draggable: false,
-            progress: undefined,
-            theme: "colored",
-          })
+        .catch(
+          (err) =>
+            toast.error(err?.response?.data?.message, {
+              position: "top-right",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: false,
+              draggable: false,
+              progress: undefined,
+              theme: "colored",
+            }),
+          setLoading(false)
         );
     }
+
+    setLoading(true);
   };
 
   return (
@@ -178,7 +186,13 @@ const AddCustomer = () => {
             className="bg-gray-200 px-6 py-2 rounded-md border hover:bg-gray-100"
             onClick={handleAddCustomer}
           >
-            Submit
+            {loading ? (
+              <div className="flex flex-row items-center justify-center gap-2">
+                <ClipLoader color="black" size={20} /> Please wait . . .
+              </div>
+            ) : (
+              "SUBMIT"
+            )}
           </button>
         </div>
       </div>

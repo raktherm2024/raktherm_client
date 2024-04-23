@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import SideBar from "../components/SideBar.jsx";
 import Content from "../components/Content.jsx";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Dashboard = ({ show, setShow }) => {
   const [userData, setUserData] = useState([]);
   const [status, setStatus] = useState("");
-  const [page, setPage] = useState("customers");
+  const [page, setPage] = useState("");
+  const navigate = useNavigate();
 
   const handleStatus = () => {
     axios

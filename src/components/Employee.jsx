@@ -2,12 +2,13 @@ import axios from "axios";
 import { Table } from "flowbite-react";
 import { useEffect, useState } from "react";
 import { FaTrashAlt } from "react-icons/fa";
-import { BarLoader } from "react-spinners";
+import { BarLoader, ClipLoader } from "react-spinners";
 import { toast } from "react-toastify";
 
 const Employee = () => {
   const [employeeData, setEmployeeData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [load, setLoad] = useState(false);
 
   useEffect(() => {
     axios
@@ -19,6 +20,7 @@ const Employee = () => {
   }, []);
 
   const refreshData = () => {
+    setLoad(false);
     axios
       .get("https://raktherm-backend.vercel.app/api/employee")
       .then((res) => {
@@ -44,6 +46,7 @@ const Employee = () => {
         refreshData();
       })
       .catch((err) => console.log(err));
+    setLoad(true);
   };
 
   return (
@@ -81,43 +84,58 @@ const Employee = () => {
             </>
           ) : (
             <>
-              <Table hoverable>
-                <Table.Head>
-                  <Table.HeadCell>Employee Code</Table.HeadCell>
-                  <Table.HeadCell>Employee Name</Table.HeadCell>
-                  <Table.HeadCell>Location</Table.HeadCell>
-                  <Table.HeadCell>Email</Table.HeadCell>
-                  <Table.HeadCell>Employee Type</Table.HeadCell>
-                  <Table.HeadCell>
-                    <span className="sr-only">Edit</span>
-                  </Table.HeadCell>
-                </Table.Head>
-                <Table.Body className="divide-y">
-                  {employeeData.map((data) => (
-                    <Table.Row
-                      className="bg-white dark:border-gray-700 dark:bg-gray-800"
-                      key={data.employeeCode}
-                    >
-                      <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                        {data.employeeCode}
-                      </Table.Cell>
-                      <Table.Cell> {data.employeeName}</Table.Cell>
-                      <Table.Cell> {data.location}</Table.Cell>
-                      <Table.Cell>
-                        {" "}
-                        {data.account.map((acc) => acc.email)}
-                      </Table.Cell>
-                      <Table.Cell> {data.type}</Table.Cell>
-                      <Table.Cell
-                        className="flex items-center gap-2 text-red-500 cursor-pointer"
-                        onClick={() => handleRemove(data._id)}
+              <div className="relative w-full h-full">
+                <Table hoverable>
+                  <Table.Head>
+                    <Table.HeadCell>Employee Code</Table.HeadCell>
+                    <Table.HeadCell>Employee Name</Table.HeadCell>
+                    <Table.HeadCell>Location</Table.HeadCell>
+                    <Table.HeadCell>Email</Table.HeadCell>
+                    <Table.HeadCell>Employee Type</Table.HeadCell>
+                    <Table.HeadCell>
+                      <span className="sr-only">Edit</span>
+                    </Table.HeadCell>
+                  </Table.Head>
+                  <Table.Body className="divide-y">
+                    {employeeData.map((data) => (
+                      <Table.Row
+                        className="bg-white dark:border-gray-700 dark:bg-gray-800"
+                        key={data.employeeCode}
                       >
-                        <FaTrashAlt /> Remove
-                      </Table.Cell>
-                    </Table.Row>
-                  ))}
-                </Table.Body>
-              </Table>
+                        <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
+                          {data.employeeCode}
+                        </Table.Cell>
+                        <Table.Cell> {data.employeeName}</Table.Cell>
+                        <Table.Cell> {data.location}</Table.Cell>
+                        <Table.Cell>
+                          {" "}
+                          {data.account.map((acc) => acc.email)}
+                        </Table.Cell>
+                        <Table.Cell> {data.type}</Table.Cell>
+                        <Table.Cell
+                          className="flex items-center gap-2 text-red-500 cursor-pointer"
+                          onClick={() => handleRemove(data._id)}
+                        >
+                          <FaTrashAlt /> Remove
+                        </Table.Cell>
+                      </Table.Row>
+                    ))}
+                  </Table.Body>
+                </Table>
+
+                {load && (
+                  <div className="absolute w-full h-[85%] top-[15%] right-1/2 translate-x-1/2 bg-white/70">
+                    <div className="h-full flex items-center justify-center">
+                      <div className="flex flex-row items-center justify-center gap-2">
+                        <ClipLoader color="green" size={50} />{" "}
+                        <span className="text-4xl text-green-600">
+                          Please wait . . .
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
             </>
           )}
         </div>

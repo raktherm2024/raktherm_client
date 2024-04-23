@@ -5,10 +5,12 @@ import { TiDelete } from "react-icons/ti";
 import ItemName from "./ItemName";
 import ItemCode from "./ItemCode";
 import { toast } from "react-toastify";
+import { ClipLoader } from "react-spinners";
 
 const Pipes = ({ openPipes, setOpenPipes, setOpenFittings, type }) => {
   const [query, setQuery] = useState("");
   const [pipeData, setPipeData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const [data, setData] = useState({
     itemName: "",
@@ -20,15 +22,19 @@ const Pipes = ({ openPipes, setOpenPipes, setOpenFittings, type }) => {
 
   useEffect(() => {
     axios
-      // .get("https://raktherm-backend.vercel.app/api/products/ppr-pipes")
       .get("https://raktherm-backend.vercel.app/api/products/ppr-pipes")
-      .then((res) => setPprPipes(res?.data));
+      .then((res) => {
+        setPprPipes(res?.data);
+      });
   }, []);
 
   useEffect(() => {
     axios
       .get("https://raktherm-backend.vercel.app/api/products/all-ppr-pipes")
-      .then((res) => setPipeData(res?.data));
+      .then((res) => {
+        setPipeData(res?.data);
+        setLoading(false);
+      });
   }, [type]);
 
   const filter = () => {
@@ -115,7 +121,9 @@ const Pipes = ({ openPipes, setOpenPipes, setOpenFittings, type }) => {
           progress: undefined,
           theme: "colored",
         });
+        setLoading(false);
       });
+    setLoading(true);
   };
 
   return (
@@ -204,64 +212,82 @@ const Pipes = ({ openPipes, setOpenPipes, setOpenFittings, type }) => {
         {/* End */}
         <div className="h-[350px] max-h-[350px] overflow-auto">
           {pipeData?.length === 0 ? (
-            <div className="flex items-center justify-center w-full h-full text-2xl">
-              -- No data available --
-            </div>
+            loading ? (
+              <div className="flex items-center justify-center w-full h-full text-2xl">
+                <ClipLoader color="green" size={50} />{" "}
+                <span className="text-4xl text-green-600">
+                  Please wait . . .
+                </span>
+              </div>
+            ) : (
+              <div className="flex items-center justify-center w-full h-full text-2xl">
+                -- No data available --
+              </div>
+            )
           ) : (
             <>
-              {filter()?.map((data, index) => (
-                <div
-                  className="flex flex-row text-sm border-b-gray-100 border-b hover:bg-gray-50"
-                  key={index}
-                >
-                  {/* Item Name */}
-                  <div className="w-full" key={data.name}>
-                    {data?.items?.map((item) => (
-                      <div
-                        className="text-left py-3 px-6 text-xs text-[#6b7280]"
-                        key={item.ItemCode}
-                      >
-                        {data.name}
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* Item Code */}
-
-                  <div className="w-full">
-                    {data?.items?.map((item) => (
-                      <div
-                        className="text-left py-3 px-6 text-xs text-[#6b7280]"
-                        key={item.itemCode}
-                      >
-                        {item.itemCode}
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* OEM */}
-                  <div className="w-1/2">
-                    {data?.items?.map((item) => (
-                      <div
-                        className="flex items-center justify-end text-left py-3 px-6 text-xs text-[#6b7280] pr-10"
-                        key={item.ItemCode}
-                      >
-                        <TiDelete
-                          size={16}
-                          title="Remove"
-                          color="red"
-                          className="cursor-pointer"
-                          onClick={() =>
-                            handleRemovePipe(data.name, item.itemCode)
-                          }
-                        />
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* Action */}
+              {loading ? (
+                <div className="flex items-center justify-center w-full h-full text-2xl">
+                  <ClipLoader color="green" size={50} />{" "}
+                  <span className="text-4xl text-green-600">
+                    Please wait . . .
+                  </span>
                 </div>
-              ))}
+              ) : (
+                filter()?.map((data, index) => (
+                  <div
+                    className="flex flex-row text-sm border-b-gray-100 border-b hover:bg-gray-50"
+                    key={index}
+                  >
+                    {/* Item Name */}
+                    <div className="w-full" key={data.name}>
+                      {data?.items?.map((item) => (
+                        <div
+                          className="text-left py-3 px-6 text-xs text-[#6b7280]"
+                          key={item.ItemCode}
+                        >
+                          {data.name}
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Item Code */}
+
+                    <div className="w-full">
+                      {data?.items?.map((item) => (
+                        <div
+                          className="text-left py-3 px-6 text-xs text-[#6b7280]"
+                          key={item.itemCode}
+                        >
+                          {item.itemCode}
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* OEM */}
+                    <div className="w-1/2">
+                      {data?.items?.map((item) => (
+                        <div
+                          className="flex items-center justify-end text-left py-3 px-6 text-xs text-[#6b7280] pr-10"
+                          key={item.ItemCode}
+                        >
+                          <TiDelete
+                            size={16}
+                            title="Remove"
+                            color="red"
+                            className="cursor-pointer"
+                            onClick={() =>
+                              handleRemovePipe(data.name, item.itemCode)
+                            }
+                          />
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Action */}
+                  </div>
+                ))
+              )}
             </>
           )}
         </div>
