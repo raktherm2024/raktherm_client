@@ -38,7 +38,7 @@ const Login = () => {
       });
     } else {
       axios
-        .post("http://localhost:5000/api/auth/login", {
+        .post("https://raktherm-backend.vercel.app/api/auth/login", {
           email,
           password,
         })

@@ -12,7 +12,7 @@ const Dashboard = ({ show, setShow }) => {
 
   const handleStatus = () => {
     axios
-      .get(`http://localhost:5000/api/orders/${userData?.userId}`)
+      .get(`https://raktherm-backend.vercel.app/api/orders/${userData?.userId}`)
       .then((res) => setStatus(res?.data?.status));
   };
 

@@ -31,7 +31,7 @@ const Customers = () => {
 
   const handleRemove = (id) => {
     axios
-      .delete(`http://localhost:5000/api/customers/${id}`)
+      .delete(`https://raktherm-backend.vercel.app/api/customers/${id}`)
       .then((res) => {
         toast.success(res.data.message, {
           position: "top-right",
@@ -49,6 +49,8 @@ const Customers = () => {
 
     setLoad(true);
   };
+
+  console.log(customerData);
 
   return (
     <>
