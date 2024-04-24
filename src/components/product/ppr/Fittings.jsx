@@ -52,8 +52,6 @@ const Pipes = ({ openFittings, setOpenFittings, setOpenPipes, type }) => {
     setItemCodeOption(filterItemCode[0]?.items);
   }, [itemName]);
 
-  console.log(loading);
-
   const handleAddFittings = () => {
     if (!itemName && !itemCode) {
       return toast.error("All field is required!", {

@@ -134,7 +134,7 @@ const SideBar = ({ page, setPage, handleStatus, userData }) => {
               </div>
             )}
 
-            {userType === "Admin" && (
+            {/* {userType === "Admin" && (
               <div
                 className={`${
                   page === "add-product" && "bg-gray-100"
@@ -143,7 +143,7 @@ const SideBar = ({ page, setPage, handleStatus, userData }) => {
               >
                 <RiProductHuntLine /> Add Product
               </div>
-            )}
+            )} */}
 
             {/* <div className="flex flex-row items-center gap-4 text-xl hover:bg-gray-100 p-4 rounded-md cursor-pointer">
               <FaMoon /> Dark

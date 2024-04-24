@@ -9,6 +9,7 @@ import { FaRegTrashCan } from "react-icons/fa6";
 import { CiSearch } from "react-icons/ci";
 import BarLoader from "react-spinners/BarLoader";
 import { toast } from "react-toastify";
+import { ClipLoader } from "react-spinners";
 
 const MessageCustomer = ({ userData }) => {
   const [customerData, setCustomerData] = useState([]);
@@ -18,6 +19,7 @@ const MessageCustomer = ({ userData }) => {
   const [messageContent, setMessageContent] = useState("");
   const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(false);
+  const [load, setLoad] = useState(true);
   const [contactList, setContactList] = useState([]);
 
   const [templates, setTemplates] = useState([]);
@@ -34,6 +36,7 @@ const MessageCustomer = ({ userData }) => {
       .get("https://raktherm-backend.vercel.app/api/customers")
       .then((res) => {
         setCustomerData(res.data);
+        setLoad(false);
       })
       .catch((err) => console.log(err));
 
@@ -80,13 +83,14 @@ const MessageCustomer = ({ userData }) => {
   };
 
   const handleDeleteTemplate = (id) => {
-    axios.delete(`http://localhost:5000/api/templates/${id}`).then((res) => {
-      console.log(res);
-      if (res) {
-        setMessageContent("");
-        refreshData();
-      }
-    });
+    axios
+      .delete(`https://raktherm-backend.vercel.app/api/templates/${id}`)
+      .then((res) => {
+        if (res) {
+          setMessageContent("");
+          refreshData();
+        }
+      });
   };
 
   const filterCustomers = (customerData) => {
@@ -162,7 +166,7 @@ const MessageCustomer = ({ userData }) => {
 
   return (
     <>
-      <div className="p-4 shadow-md">
+      <div className="relative p-4 shadow-md">
         <h1 className="text-4xl mb-4 text-center">Message a Customer</h1>
 
         <div className="w-full  flex flex-row">
@@ -173,25 +177,31 @@ const MessageCustomer = ({ userData }) => {
             <div className="p-4">
               <p className="font-bold text-lg mb-4">Recepient:</p>
               <div className="flex flex-wrap gap-4 p-4 border-2 h-40 rounded-md shadow-md">
-                {filteredArr.map((data, index) => (
-                  <div
-                    className="relative flex flex-col justify-center h-16 border-2 border-green-500 p-2 rounded-md shadow-md"
-                    key={data.name}
-                  >
-                    <div className="font-bold">{data.name}</div>
-                    <div className="flex flex-row items-center">
-                      <FaMobileAlt />
-                      <p className="pt-[2px]">{data.contact}</p>
-                    </div>
-
+                {filteredArr.length === 0 ? (
+                  <span className="italic font-light text-gray-500">
+                    Please select on customer list . . .
+                  </span>
+                ) : (
+                  filteredArr.map((data, index) => (
                     <div
-                      className="absolute -top-3 -right-3 bg-red-500 cursor-pointer p-1 rounded-full"
-                      onClick={() => removeItem(index)}
+                      className="relative flex flex-col justify-center h-16 border-2 border-green-500 p-2 rounded-md shadow-md"
+                      key={data.name}
                     >
-                      <FaTimesCircle size={16} color={"white"} />
+                      <div className="font-bold">{data.name}</div>
+                      <div className="flex flex-row items-center">
+                        <FaMobileAlt />
+                        <p className="pt-[2px]">{data.contact}</p>
+                      </div>
+
+                      <div
+                        className="absolute -top-3 -right-3 bg-red-500 cursor-pointer p-1 rounded-full"
+                        onClick={() => removeItem(index)}
+                      >
+                        <FaTimesCircle size={16} color={"white"} />
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))
+                )}
               </div>
             </div>
 
@@ -387,6 +397,19 @@ const MessageCustomer = ({ userData }) => {
             </div>
           </Modal.Body>
         </Modal>
+
+        {load && (
+          <div className="absolute w-[97%] h-[78%] top-[19%] right-1/2 translate-x-1/2 bg-white">
+            <div className="h-full flex items-center justify-center">
+              <div className="flex flex-row items-center justify-center gap-2">
+                <ClipLoader color="green" size={50} />{" "}
+                <span className="text-4xl text-green-600">
+                  Please wait . . .
+                </span>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </>
   );

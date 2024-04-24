@@ -50,8 +50,6 @@ const Customers = () => {
     setLoad(true);
   };
 
-  console.log(customerData);
-
   return (
     <>
       <h1 className="text-4xl mb-4">Customer List</h1>

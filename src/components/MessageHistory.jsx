@@ -9,8 +9,6 @@ const MessageHistory = ({ userData }) => {
   const { userType } = userData;
   const [data, setData] = useState([]);
 
-  console.log(userType);
-
   useEffect(() => {
     axios
       .get("https://raktherm-backend.vercel.app/api/messages")
