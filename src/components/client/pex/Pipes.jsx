@@ -39,7 +39,7 @@ const Pipes = ({ orderId, setOrderData }) => {
     e.preventDefault();
 
     await axios
-      .put(`http://localhost:5000/api/orders/${orderId}`, {
+      .put(`https://raktherm-backend.vercel.app/api/orders/${orderId}`, {
         itemName: itemName,
         itemCode: itemCode,
         quantity: quantity,

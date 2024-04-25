@@ -53,7 +53,7 @@ const AddEmployee = () => {
     } else {
       axios
         // .post("https://raktherm-backend.vercel.app/api/employee", formData)
-        .post("http://localhost:5000/api/employee", formData)
+        .post("https://raktherm-backend.vercel.app/api/employee", formData)
         .then(() => {
           toast.success("New employee has been added", {
             position: "top-right",

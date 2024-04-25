@@ -87,7 +87,7 @@ const AddOrder = ({ userData, status, setStatus, setPage }) => {
 
   // Cancel Order
   const handleCancelOrder = (id) => {
-    axios.delete(`http://localhost:5000/api/orders/${id}`);
+    axios.delete(`https://raktherm-backend.vercel.app/api/orders/${id}`);
     setStatus("");
     setOrderForm(false);
     generateNewOr();

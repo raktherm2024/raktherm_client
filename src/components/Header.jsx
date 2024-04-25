@@ -4,6 +4,7 @@ import { RiMenuFoldLine, RiMenuUnfoldFill } from "react-icons/ri";
 import LOGO from "../assets/img/rak-logo.png";
 
 const Header = ({ show, setShow, userData }) => {
+  console.log(userData);
   return (
     <div className="flex flex-row items-center justify-between bg-gray-200 p-4">
       <div>

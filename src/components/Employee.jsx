@@ -33,7 +33,7 @@ const Employee = () => {
 
   const handleRemove = (id) => {
     axios
-      .delete(`http://localhost:5000/api/employee/${id}`)
+      .delete(`https://raktherm-backend.vercel.app/api/employee/${id}`)
       .then((res) => {
         toast.success(res.data.message, {
           position: "top-right",
@@ -74,19 +74,21 @@ const Employee = () => {
   } = formData;
 
   const getSpecificEmployee = (id) => {
-    axios.post(`http://localhost:5000/api/employee/${id}`).then((res) => {
-      setFormData({
-        ...formData,
-        employeeId: id,
-        employeeCode: res?.data[0]?.employeeCode,
-        employeeName: res?.data[0]?.employeeName,
-        location: "RAKtherm",
-        type: res?.data[0]?.type,
-        email: res?.data[0]?.account[0]?.email,
-        password: res?.data[0]?.account[0]?.password,
+    axios
+      .post(`https://raktherm-backend.vercel.app/api/employee/${id}`)
+      .then((res) => {
+        setFormData({
+          ...formData,
+          employeeId: id,
+          employeeCode: res?.data[0]?.employeeCode,
+          employeeName: res?.data[0]?.employeeName,
+          location: "RAKtherm",
+          type: res?.data[0]?.type,
+          email: res?.data[0]?.account[0]?.email,
+          password: res?.data[0]?.account[0]?.password,
+        });
+        setShowModal(true);
       });
-      setShowModal(true);
-    });
   };
 
   const handleChange = (e) => {
@@ -106,7 +108,10 @@ const Employee = () => {
 
   const handleSave = () => {
     axios
-      .put(`http://localhost:5000/api/employee/${employeeId}`, formData)
+      .put(
+        `https://raktherm-backend.vercel.app/api/employee/${employeeId}`,
+        formData
+      )
       .then((res) => {
         if (res) {
           toast.success(res.data.message, {

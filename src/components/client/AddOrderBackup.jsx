@@ -54,7 +54,7 @@ const AddOrder = ({ userData, status, setStatus }) => {
 
   // Cancel Order
   const handleCancelOrder = (id) => {
-    axios.delete(`http://localhost:5000/api/orders/${id}`);
+    axios.delete(`https://raktherm-backend.vercel.app/api/orders/${id}`);
     setStatus("");
     setOrderForm(false);
     generateNewOr();
@@ -64,9 +64,11 @@ const AddOrder = ({ userData, status, setStatus }) => {
 
   // Update Order Data
   const updateOrderData = () => {
-    axios.get(`http://localhost:5000/api/orders/${userId}`).then((res) => {
-      setOrderData(res?.data?.orders);
-    });
+    axios
+      .get(`https://raktherm-backend.vercel.app/api/orders/${userId}`)
+      .then((res) => {
+        setOrderData(res?.data?.orders);
+      });
   };
 
   const props = {

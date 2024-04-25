@@ -50,7 +50,7 @@ const AddCustomer = () => {
     } else {
       axios
         // .post("https://raktherm-backend.vercel.app/api/customers", formData)
-        .post("http://localhost:5000/api/customers", formData)
+        .post("https://raktherm-backend.vercel.app/api/customers", formData)
         .then(() => {
           toast.success("New customer has been added", {
             position: "top-right",

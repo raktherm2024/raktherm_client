@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 const OrderList = ({ orderData, orderId, setOrderData }) => {
   const handleRemoveItem = (id) => {
     axios
-      .put(`http://localhost:5000/api/orders/remove/${orderId}`, {
+      .put(`https://raktherm-backend.vercel.app/api/orders/remove/${orderId}`, {
         itemId: id,
       })
       .then((res) => {
