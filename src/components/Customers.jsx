@@ -69,11 +69,11 @@ const Customers = () => {
             <>
               <Table hoverable>
                 <Table.Head>
-                  <Table.HeadCell>Employee Code</Table.HeadCell>
-                  <Table.HeadCell>Employee Name</Table.HeadCell>
+                  <Table.HeadCell>Customer Code</Table.HeadCell>
+                  <Table.HeadCell>Customer Name</Table.HeadCell>
                   <Table.HeadCell>Location</Table.HeadCell>
-                  <Table.HeadCell>Email</Table.HeadCell>
-                  <Table.HeadCell>Employee Type</Table.HeadCell>
+                  {/* <Table.HeadCell>Email</Table.HeadCell> */}
+                  <Table.HeadCell>Contact No.</Table.HeadCell>
                   <Table.HeadCell>
                     <span className="sr-only">Edit</span>
                   </Table.HeadCell>
@@ -90,7 +90,7 @@ const Customers = () => {
                   <Table.HeadCell>Customer Code</Table.HeadCell>
                   <Table.HeadCell>Customer Name</Table.HeadCell>
                   <Table.HeadCell>Location</Table.HeadCell>
-                  <Table.HeadCell>Email</Table.HeadCell>
+                  {/* <Table.HeadCell>Email</Table.HeadCell> */}
                   <Table.HeadCell>Contact No.</Table.HeadCell>
                   <Table.HeadCell>
                     <span className="sr-only">Edit</span>
@@ -111,10 +111,10 @@ const Customers = () => {
                           </Table.Cell>
                           <Table.Cell> {data.customerName}</Table.Cell>
                           <Table.Cell> {data.location}</Table.Cell>
-                          <Table.Cell>
+                          {/* <Table.Cell>
                             {" "}
                             {data.account.map((acc) => acc.email)}
-                          </Table.Cell>
+                          </Table.Cell> */}
                           <Table.Cell> {data.contact}</Table.Cell>
                           <Table.Cell
                             className="flex items-center gap-2 text-red-600 cursor-pointer "

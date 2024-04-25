@@ -1,6 +1,7 @@
 import React from "react";
 import { Avatar } from "flowbite-react";
 import { RiMenuFoldLine, RiMenuUnfoldFill } from "react-icons/ri";
+import LOGO from "../assets/img/rak-logo.png";
 
 const Header = ({ show, setShow, userData }) => {
   return (
@@ -18,7 +19,10 @@ const Header = ({ show, setShow, userData }) => {
           </p>
           <p className="text-right">{userData.userType}</p>
         </div>
-        <Avatar img="https://www.flowbite-react.com/images/people/profile-picture-5.jpg" />
+        <img
+          src={LOGO}
+          className="w-40 h-18 border-2 border-gray-500 rounded-lg p-1"
+        />
       </div>
     </div>
   );

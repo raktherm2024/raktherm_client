@@ -35,14 +35,7 @@ const AddCustomer = () => {
   };
 
   const handleAddCustomer = async () => {
-    if (
-      !customerCode ||
-      !customerName ||
-      !location ||
-      !contact ||
-      !email ||
-      !password
-    ) {
+    if (!customerCode || !customerName || !location || !contact) {
       toast.error("All fields are required!", {
         position: "top-right",
         autoClose: 3000,
@@ -56,7 +49,8 @@ const AddCustomer = () => {
       setLoading(false);
     } else {
       axios
-        .post("https://raktherm-backend.vercel.app/api/customers", formData)
+        // .post("https://raktherm-backend.vercel.app/api/customers", formData)
+        .post("http://localhost:5000/api/customers", formData)
         .then(() => {
           toast.success("New customer has been added", {
             position: "top-right",
@@ -71,20 +65,19 @@ const AddCustomer = () => {
             clearData();
           setLoading(false);
         })
-        .catch(
-          (err) =>
-            toast.error(err?.response?.data?.message, {
-              position: "top-right",
-              autoClose: 3000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: false,
-              draggable: false,
-              progress: undefined,
-              theme: "colored",
-            }),
-          setLoading(false)
-        );
+        .catch((err) => {
+          setLoading(false);
+          toast.error(err?.response?.data?.message, {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: false,
+            progress: undefined,
+            theme: "colored",
+          });
+        });
     }
 
     setLoading(true);
@@ -151,7 +144,7 @@ const AddCustomer = () => {
           />
         </div>
 
-        <div>
+        {/* <div>
           <div className="mb-2 block">
             <Label htmlFor="email" value="Email" />
           </div>
@@ -177,7 +170,7 @@ const AddCustomer = () => {
             required
             onChange={handleChange}
           />
-        </div>
+        </div> */}
 
         <div>&nbsp;</div>
 
