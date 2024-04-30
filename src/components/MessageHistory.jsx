@@ -51,8 +51,22 @@ const MessageHistory = ({ userData }) => {
             Clear History
           </h1>
         )}
+
+        {userType === "Super Admin" && (
+          <h1
+            className={`${
+              data.length == 0
+                ? "bg-red-300 cursor-not-allowed text-white"
+                : "cursor-pointer bg-red-500 text-white hover:bg-white hover:border-2 hover:border-green-500 hover:text-black"
+            } flex items-center gap-1 text-base  px-2 py-1 rounded-md border-2 border-white shadow-md `}
+            onClick={data.length == 0 ? () => {} : handleClearHistory}
+          >
+            <BsTrash size={20} className="mb-1" />
+            Clear History
+          </h1>
+        )}
       </div>
-      <div className="overflow-x-auto border border-gray-200 shadow-md">
+      <div className="overflow-x-auto border border-gray-200 shadow-md max-h-[700px] overflow-auto">
         {data.length === 0 ? (
           <>
             <Table hoverable>

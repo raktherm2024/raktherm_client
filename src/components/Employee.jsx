@@ -6,7 +6,7 @@ import { ImEye, ImEyeBlocked } from "react-icons/im";
 import { BarLoader, ClipLoader } from "react-spinners";
 import { toast } from "react-toastify";
 
-const Employee = () => {
+const Employee = ({ userData }) => {
   const [employeeData, setEmployeeData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [load, setLoad] = useState(false);
@@ -93,17 +93,6 @@ const Employee = () => {
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
-  };
-
-  const clearData = () => {
-    setFormData({
-      ...formData,
-      employeeCode: "",
-      employeeName: "",
-      type: "",
-      email: "",
-      password: "",
-    });
   };
 
   const handleSave = () => {
@@ -209,32 +198,83 @@ const Employee = () => {
                           className="flex items-center justify-between"
                           key={data.employeeCode}
                         >
-                          {data.type === "Admin" ? (
-                            <Table.Cell className="flex items-center gap-2 text-green-500 cursor-pointer">
-                              &nbsp;
-                            </Table.Cell>
+                          {userData.userType === "Super Admin" ? (
+                            data.type === "Super Admin" ? (
+                              <Table.Cell className="flex items-center gap-2 text-green-500 cursor-pointer">
+                                &nbsp;
+                              </Table.Cell>
+                            ) : (
+                              <Table.Cell
+                                className="flex items-center gap-2 text-green-500 cursor-pointer"
+                                onClick={() => {
+                                  getSpecificEmployee(data._id);
+                                }}
+                              >
+                                <FaEdit /> Change Employee Type
+                              </Table.Cell>
+                            )
                           ) : (
-                            <Table.Cell
-                              className="flex items-center gap-2 text-green-500 cursor-pointer"
-                              onClick={() => {
-                                getSpecificEmployee(data._id);
-                              }}
-                            >
-                              <FaEdit /> Change Employee Type
-                            </Table.Cell>
+                            ""
                           )}
 
-                          {data.type === "Admin" ? (
-                            <Table.Cell className="flex items-center gap-2 text-green-500 cursor-pointer">
-                              &nbsp;
-                            </Table.Cell>
+                          {userData.userType === "Admin" ? (
+                            data.type === "Admin" ? (
+                              <Table.Cell className="flex items-center gap-2 text-green-500 cursor-pointer">
+                                &nbsp;
+                              </Table.Cell>
+                            ) : data.type === "Super Admin" ? (
+                              <Table.Cell className="flex items-center gap-2 text-green-500 cursor-pointer">
+                                &nbsp;
+                              </Table.Cell>
+                            ) : (
+                              <Table.Cell
+                                className="flex items-center gap-2 text-green-500 cursor-pointer"
+                                onClick={() => {
+                                  getSpecificEmployee(data._id);
+                                }}
+                              >
+                                <FaEdit /> Change Employee Type
+                              </Table.Cell>
+                            )
                           ) : (
-                            <Table.Cell
-                              className="flex items-center gap-2 text-red-500 cursor-pointer"
-                              onClick={() => handleRemove(data._id)}
-                            >
-                              <FaTrashAlt /> Remove
-                            </Table.Cell>
+                            ""
+                          )}
+
+                          {userData.userType === "Super Admin" ? (
+                            data.type === "Super Admin" ? (
+                              <Table.Cell className="flex items-center gap-2 text-green-500 cursor-pointer">
+                                &nbsp;
+                              </Table.Cell>
+                            ) : (
+                              <Table.Cell
+                                className="flex items-center gap-2 text-red-500 cursor-pointer"
+                                onClick={() => handleRemove(data._id)}
+                              >
+                                <FaTrashAlt /> Remove
+                              </Table.Cell>
+                            )
+                          ) : (
+                            ""
+                          )}
+                          {userData.userType === "Admin" ? (
+                            data.type === "Admin" ? (
+                              <Table.Cell className="flex items-center gap-2 text-green-500 cursor-pointer">
+                                &nbsp;
+                              </Table.Cell>
+                            ) : data.type === "Super Admin" ? (
+                              <Table.Cell className="flex items-center gap-2 text-green-500 cursor-pointer">
+                                &nbsp;
+                              </Table.Cell>
+                            ) : (
+                              <Table.Cell
+                                className="flex items-center gap-2 text-red-500 cursor-pointer"
+                                onClick={() => handleRemove(data._id)}
+                              >
+                                <FaTrashAlt /> Remove
+                              </Table.Cell>
+                            )
+                          ) : (
+                            ""
                           )}
                         </div>
                       </Table.Row>

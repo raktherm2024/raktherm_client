@@ -20,7 +20,7 @@ const SideBar = ({ page, setPage, handleStatus, userData }) => {
           <img src={LOGO} alt="logo" className="h-32 mb-4 m-4" />
 
           <div className="p-2">
-            {userType === "Admin" && (
+            {userType === "Super Admin" ? (
               <div
                 className={`${
                   page === "employee" && "bg-gray-100"
@@ -29,8 +29,19 @@ const SideBar = ({ page, setPage, handleStatus, userData }) => {
               >
                 <LiaUsersSolid /> Employee
               </div>
+            ) : userType === "Admin" ? (
+              <div
+                className={`${
+                  page === "employee" && "bg-gray-100"
+                } flex flex-row items-center gap-4 text-xl hover:bg-gray-100 p-4 rounded-md cursor-pointer`}
+                onClick={() => setPage("employee")}
+              >
+                <LiaUsersSolid /> Employee
+              </div>
+            ) : (
+              ""
             )}
-            {userType === "Admin" && (
+            {userType === "Super Admin" ? (
               <div
                 className={`${
                   page === "customers" && "bg-gray-100"
@@ -39,6 +50,26 @@ const SideBar = ({ page, setPage, handleStatus, userData }) => {
               >
                 <LiaUsersSolid /> Customers
               </div>
+            ) : userType === "Admin" ? (
+              <div
+                className={`${
+                  page === "customers" && "bg-gray-100"
+                } flex flex-row items-center gap-4 text-xl hover:bg-gray-100 p-4 rounded-md cursor-pointer`}
+                onClick={() => setPage("customers")}
+              >
+                <LiaUsersSolid /> Customers
+              </div>
+            ) : userType === "Coordinator" ? (
+              <div
+                className={`${
+                  page === "customers" && "bg-gray-100"
+                } flex flex-row items-center gap-4 text-xl hover:bg-gray-100 p-4 rounded-md cursor-pointer`}
+                onClick={() => setPage("customers")}
+              >
+                <LiaUsersSolid /> Customers
+              </div>
+            ) : (
+              ""
             )}
 
             {userType !== "Customer" && (
@@ -87,33 +118,12 @@ const SideBar = ({ page, setPage, handleStatus, userData }) => {
                 <FaRegListAlt /> Create Order
               </div>
             )}
-            {/* {userType === "Admin" && (
-              <div
-                className={`${
-                  page === "orders" && "bg-gray-100"
-                } flex flex-row items-center gap-4 text-xl hover:bg-gray-100 p-4 rounded-md cursor-pointer`}
-                onClick={() => setPage("orders")}
-              >
-                <FaRegListAlt /> Orders
-              </div>
-            )}
-
-            {userType === "Admin" && (
-              <div
-                className={`${
-                  page === "order-status" && "bg-gray-100"
-                } flex flex-row items-center gap-4 text-xl hover:bg-gray-100 p-4 rounded-md cursor-pointer`}
-                onClick={() => setPage("order-status")}
-              >
-                <GrStatusInfo /> Order Status
-              </div>
-            )} */}
           </div>
         </div>
 
         <div className="w-full px-2 border-t border-gray-300">
           <div className="py-2">
-            {userType === "Admin" && (
+            {userType === "Super Admin" ? (
               <div
                 className={`${
                   page === "add-employee" && "bg-gray-100"
@@ -122,8 +132,19 @@ const SideBar = ({ page, setPage, handleStatus, userData }) => {
               >
                 <LuUserPlus2 /> Add Employee
               </div>
+            ) : userType === "Admin" ? (
+              <div
+                className={`${
+                  page === "add-employee" && "bg-gray-100"
+                } flex flex-row items-center gap-4 text-xl hover:bg-gray-100 p-4 rounded-md cursor-pointer`}
+                onClick={() => setPage("add-employee")}
+              >
+                <LuUserPlus2 /> Add Employee
+              </div>
+            ) : (
+              ""
             )}
-            {userType === "Admin" && (
+            {userType === "Super Admin" ? (
               <div
                 className={`${
                   page === "add-customer" && "bg-gray-100"
@@ -132,27 +153,27 @@ const SideBar = ({ page, setPage, handleStatus, userData }) => {
               >
                 <LuUserPlus2 /> Add Customer
               </div>
-            )}
-
-            {/* {userType === "Admin" && (
+            ) : userType === "Admin" ? (
               <div
                 className={`${
-                  page === "add-product" && "bg-gray-100"
+                  page === "add-customer" && "bg-gray-100"
                 } flex flex-row items-center gap-4 text-xl hover:bg-gray-100 p-4 rounded-md cursor-pointer`}
-                onClick={() => setPage("add-product")}
+                onClick={() => setPage("add-customer")}
               >
-                <RiProductHuntLine /> Add Product
+                <LuUserPlus2 /> Add Customer
               </div>
-            )} */}
-
-            {/* <div className="flex flex-row items-center gap-4 text-xl hover:bg-gray-100 p-4 rounded-md cursor-pointer">
-              <FaMoon /> Dark
-            </div> */}
-            {/* {userType === "Admin" && (
-              <div className="flex flex-row items-center gap-4 text-xl hover:bg-gray-100 p-4 rounded-md cursor-pointer">
-                <TbReportAnalytics /> Report
+            ) : userType === "Coordinator" ? (
+              <div
+                className={`${
+                  page === "add-customer" && "bg-gray-100"
+                } flex flex-row items-center gap-4 text-xl hover:bg-gray-100 p-4 rounded-md cursor-pointer`}
+                onClick={() => setPage("add-customer")}
+              >
+                <LuUserPlus2 /> Add Customer
               </div>
-            )} */}
+            ) : (
+              ""
+            )}
 
             <div
               className="flex flex-row items-center gap-4 text-xl hover:bg-gray-100 p-4 rounded-md cursor-pointer"
